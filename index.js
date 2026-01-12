@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 const generateId = () => {
-    return Math.floor(Math.random() * 500) + 1
+    return `${Math.floor(Math.random() * 500) + 1}`
 }
 
 let persons = [
@@ -99,3 +99,4 @@ const unknownEndpoint = (req, res) => {
 app.use(unknownEndpoint)
 
 app.listen(PORT)
+module.exports = { generateId }
