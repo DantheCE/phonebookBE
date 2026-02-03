@@ -75,7 +75,8 @@ app.delete('/api/persons/:id', (req, res) => {
         .catch(error => next(error))
 })
 
-app.put('/api/notes.:id', (req, res, next) => {
+app.put('/api/persons/:id', (req, res, next) => {
+    console.log(req.body)
     const {name, number} = req.body
 
     PhoneLog.findById(req.params.id)
@@ -89,9 +90,6 @@ app.put('/api/notes.:id', (req, res, next) => {
 
             return log.save().then((updatedLog) => {
                 res.json(updatedLog)
-            })
-            .catch(error => {
-                console.error('failed to update', error.message)
             })
         })
         .catch(error => next(error))
