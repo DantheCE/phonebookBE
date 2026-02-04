@@ -11,8 +11,16 @@ mongoose.connect(url, {family: 4})
     })
 
 const phoneLogSchema = new mongoose.Schema({
-    name: String,
-    number: String,
+    name: {
+        type: String,
+        minLength: 3,
+        required: true
+    },
+    number: {
+        type: String, 
+        minLength: 3,
+        required: true
+    },
 })
 
 phoneLogSchema.set(
