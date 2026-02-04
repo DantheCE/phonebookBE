@@ -12,15 +12,12 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 
 
 
-app.get('/api/persons', (req, res) => {
+app.get('/api/persons', (req, res, next) => {
     PhoneLog.find({})
         .then(phonelog => {
             res.json(phonelog)
         })
-        .catch(error => {
-            console.log('error fetching notes', error)
-            res.status(500).json({error: 'error fetching notes'})
-        })
+        .catch(error => next(error))
 })
 
 
@@ -37,10 +34,15 @@ app.get('/api/persons/:id', (req, res, next) => {
     .catch(error => next(error))
 })
 
-app.get('/info', (req, res) => {
-    const date = new Date()
-    const info = `<p>Phonebook has info for ${persons.length} people<br />${date}</p>`
-    res.send(info)
+app.get('/info', async (req, res) => {
+    try {
+        const date = new Date()
+        const count = await PhoneLog.countDocuments({})
+        res.send(`<p>Phonebook has info for ${count} people<br />${date}</p>`)
+    }
+    catch (error){
+        res.status(500).json({error: "Failed to retrieve count"})
+    }
 })
 
 app.post('/api/persons', (req, res) => {
