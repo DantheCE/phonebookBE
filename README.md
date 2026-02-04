@@ -114,26 +114,6 @@ The application uses a Mongoose schema with the following structure:
 
 The schema automatically transforms MongoDB's `_id` to `id` in JSON responses and removes the `__v` version key.
 
-## MongoDB Database Operations
-
-The project includes a `mongo.js` script for interacting with the MongoDB database directly.
-
-### Viewing all contacts
-
-```bash
-node mongo.js <password>
-```
-
-This will connect to the database and display all contacts in the phonebook.
-
-### Adding a new contact
-
-```bash
-node mongo.js <password> "<name>" "<number>"
-```
-
-This will add a new contact to the database. Use double quotes if the name contains spaces.
-
 ## Dependencies
 
 - **Express**: Web framework for Node.js
@@ -159,7 +139,6 @@ The application includes comprehensive error handling:
 - All contacts are stored in MongoDB with persistent storage.
 - The database connection uses IPv4 (`family: 4`) for compatibility.
 - Schema validation ensures names and numbers are at least 3 characters long.
-- The `mongo.js` script requires the MongoDB database password as a command-line argument.
 
 ## License
 
