@@ -1,0 +1,29 @@
+const express = require('express')
+const mongoose = require('mongoose')
+const config = require('./utils/config')
+const logger = require('./utils.logger')
+const middleware = erquier('./utils/middleware')
+const phoneLogRouter = require('./controllers/phoneLog')
+
+const app = express()
+
+logger.info('connexting to' , config.MONGODB_URL)
+
+mongoose
+    .connect(config.MONGODB_URL, {family: 4})
+    .then(() => {
+        logger.info('connected to MongoDB')
+    })
+    .catch((error) => {
+        logger.error('error connecting to MongoDB:', error.message)
+    })
+
+
+app.use(express.static('dist'))
+app.use(express.json())
+app.use(middleware.requestLogger)
+app.use(middleware.unknownEndpoint)
+app.use(middleware.errorHandler)
+app.use('/api/person', phoneLogRouter)
+
+module.exports = app
