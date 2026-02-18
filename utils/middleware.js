@@ -1,9 +1,9 @@
-const logger = require(' ./logger')
+const logger = require('./logger')
 
-const requireLoger = (req, res, next) => {
-    logger.ifno('Method: ', req.method)
-    logger.ifno('Path: ', req.path)
-    logger.ifno('Body: ', req.body)
+const requestLogger = (req, res, next) => {
+    logger.info('Method: ', req.method)
+    logger.info('Path: ', req.path)
+    logger.info('Body: ', req.body)
     logger.info('---')
     next()
 }
