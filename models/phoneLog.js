@@ -1,14 +1,6 @@
 const mongoose = require('mongoose')
 let url = process.env.MONGODB_URL
 
-mongoose.set('strictQuery', false)
-mongoose.connect(url, { family: 4 })
-    .then(result => {
-        console.log('Connected to database succesfully')
-    })
-    .catch(error => {
-        console.error('Not able to connect to database', error.message)
-    })
 
 const phoneLogSchema = new mongoose.Schema({
     name: {
