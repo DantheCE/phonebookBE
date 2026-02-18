@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const PhoneLog = require('./models/database')
+const PhoneLog = require('./models/phoneLog')
 const morgan = require('morgan')
 const PORT = process.env.PORT || 3001
 
