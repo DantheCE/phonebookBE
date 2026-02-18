@@ -45,14 +45,14 @@ app.get('/info', async (req, res) => {
     }
 })
 
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res, next) => {
     const body = req.body
 
     if (!body.name){
-        return res.status(404).json({error: 'name is missing'})
+        return res.status(400).json({error: 'name is missing'})
     }
     if (!body.number){
-        return res.status(404).json({error: 'number is missing'})
+        return res.status(400).json({error: 'number is missing'})
     }
 
     const person = new PhoneLog({
@@ -68,7 +68,7 @@ app.post('/api/persons', (req, res) => {
         .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', (req, res, next) => {
     PhoneLog.findByIdAndDelete(req.params.id)
         .then(log => {
                 console.log('note deleted')
@@ -106,6 +106,10 @@ const errorHandler = (error, req, res, next) => {
 
     if (error.name === 'CastError'){
         return res.status(400).send({error: 'malformatted id'})
+    }
+
+    else if (error.name === 'ValidationError'){
+        return res.status(400).send({error: error.message})
     }
     next(error)
 }
