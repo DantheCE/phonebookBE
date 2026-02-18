@@ -1,16 +1,16 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const config = require('./utils/config')
-const logger = require('./utils.logger')
-const middleware = erquier('./utils/middleware')
-const phoneLogRouter = require('./controllers/phoneLog')
+const logger = require('./utils/logger')
+const middleware = require('./utils/middleware')
+const phoneLogRouter = require('./controllers/phoneLogs')
 
 const app = express()
 
-logger.info('connexting to' , config.MONGODB_URL)
+logger.info('connecting to', config.MONGODB_URL)
 
 mongoose
-    .connect(config.MONGODB_URL, {family: 4})
+    .connect(config.MONGODB_URL, { family: 4 })
     .then(() => {
         logger.info('connected to MongoDB')
     })
