@@ -1,7 +1,10 @@
+# POST GET https://phonebookbe-j02v.onrender.com/api/persons HTTP/1.1
+
+
 POST http://localhost:3001/api/persons HTTP/1.1
 content-type: application/json
 
 {
     "name": "Daniel D",
-    "number": "0904"
+    "number": "090-444-0098"
 }

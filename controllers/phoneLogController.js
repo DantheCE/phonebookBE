@@ -1,5 +1,5 @@
 const phoneLogRouter = require('express').Router()
-const phoneLog = require('../models/phoneLog')
+const PhoneLog = require('../models/phoneLog')
 
 
 phoneLogRouter.get('/', (req, res, next) => {
@@ -49,7 +49,7 @@ phoneLogRouter.post('/', (req, res, next) => {
         "name": body.name,
         "number": body.number
     })
-
+    console.log('new record created, pushing to database now')
     person.save()
         .then(log => {
             res.json(log)
